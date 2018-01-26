@@ -3,6 +3,7 @@ const minimist = require('minimist');
 
 const developmentConfig = require('./webpack.dev.js');
 const productionConfig = require('./webpack.prod.js');
+const startServer = require('./server');
 
 const args = minimist(process.argv.slice(2));
 const isDevelopment = [true,'true'].includes(args.dev);
@@ -27,15 +28,15 @@ function startWebpack() {
 function built(err,stats){
   if (err /*|| stats.hasErrors()*/) throw (err /*|| new Error("Couldn't Start, Webpack Error")*/);
   console.log('Webpack Built');
-  if (!isDevelopment) startServer();
+  if (!isDevelopment) doStartServer();
 }
 
 var serverStarted = false;
-function startServer(){
+function doStartServer(){
   if (serverStarted) throw new Error('Server Already Started');
   serverStarted = true;
   console.log('Starting Server');
-  require('./server').then(()=>{
+  startServer().then(()=>{
     console.log('Server Running');
   }).catch(err=>{
     throw (err || new Error("Couldn't Start, Server Error"));
