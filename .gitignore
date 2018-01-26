@@ -12,7 +12,6 @@
 # misc
 config.js
 package-lock.json
-/server/static/build
 .DS_Store
 .env.local
 .env.development.local
