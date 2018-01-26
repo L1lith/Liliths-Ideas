@@ -4,7 +4,7 @@ import './background.css';
 class Background extends Component {
   render(){
     return (
-      <img id='main-background' src='https://i.imgur.com/0G5nOSG.jpg'/>
+      <img id='main-background' src='/background'/>
     );
   }
 }
