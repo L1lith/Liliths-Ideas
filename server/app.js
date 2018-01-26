@@ -15,19 +15,21 @@ const successful = new Promise((res, rej) => {
 });
 
 function createServer(){
-  getModels().then(models => {
+  return new Promise((resolve,reject)=>{
+    getModels().then(models => {
 
-    const app = express();
+      const app = express();
 
-    //app.use(forceSSL);
-    app.use(helmet());
-    app.use(bodyParser.json());
-    app.use(cookieParser());
-    routing(app, models);
+      //app.use(forceSSL);
+      app.use(helmet());
+      app.use(bodyParser.json());
+      app.use(cookieParser());
+      routing(app, models);
 
-    resolve(app);
-  }).catch(err => {
-    reject('Mongoose Error');
+      resolve(app);
+    }).catch(err => {
+      reject('Mongoose Error');
+    });
   });
 }
 
