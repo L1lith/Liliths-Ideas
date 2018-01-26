@@ -25,7 +25,7 @@ require('./models').then(models => {
 
   resolve(app);
 }).catch(err => {
-  reject('Mongoose Error', err);
+  reject('Mongoose Error');
 });
 
 module.exports = successful;
