@@ -7,7 +7,7 @@ function giveSession(res, user, models) {
       res.cookie('session', session._id, {
         maxAge: 1000 * 60 * 60 * 24 * 30,
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === 'production',
         sameSite: true
       });
       resolve(session);

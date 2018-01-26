@@ -1,6 +1,6 @@
 function sanitize(object,format){
   if (typeof format == 'object' && !format.type && !format.validate) {
-    if (Array.isArray(format) != Array.isArray(object)) return false;
+    if (typeof format != typeof object || Array.isArray(format) != Array.isArray(object)) return false;
     return Object.entries(object).every(pair=>sanitize(pair[1],format[pair[0]]));
   } else {
     if (typeof format == 'function') {

@@ -25,7 +25,7 @@ function startWebpack() {
 }
 
 function built(err,stats){
-  if (err || stats.hasErrors()) throw (err || new Error("Couldn't Start, Webpack Error"));
+  if (err /*|| stats.hasErrors()*/) throw (err /*|| new Error("Couldn't Start, Webpack Error")*/);
   console.log('Webpack Built');
   if (!isDevelopment) startServer();
 }
