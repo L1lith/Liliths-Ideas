@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin|Raleway|Supermercado+One');
+html {
+  overflow: hidden;
+}
+body {
+  position: absolute;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.app, #root {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.app {
+  position: relative;
+  color: #dde3f9;
+  font-family: 'Cabin', sans-serif;
+  text-shadow: 0 0 1px black;
+  *::selection {
+    background: #9fdad596;
+  }
+  input {
+    font-family: inherit;
+    border-radius: 2px;
+  }
+  p, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+  ul {
+    list-style: none;
+    margin: none;
+    padding: none;
+  }
+  a {
+    text-decoration: inherit;
+    color: inherit;
+  }
+  .alert {
+    border: 2px solid grey;
+    padding: 10px;
+    font-size: 1.5em;
+    &.normal {
+      color: #37cc9e;
+      border-color: #37cc9e;
+    }
+    &.error {
+      color: #f5acc9;
+      border-color: #f5acc9;
+    }
+  }
+  .content {
+    padding: 1% 5%;
+    text-align: center;
+    line-height: 22px;
+    margin-bottom: 30px;
+  }
+  .spread {
+    & > * {
+      display: table-cell;
+      text-align: center;
+    }
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    padding: 0;
+  }
+  & > * {
+    position: inline-block;
+  }
+  .backgroundtext {
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: none;
+  }
+  form {
+    display: inline-block;
+    padding: 10px 50px;
+    background-color: ~'#ffffff9c';
+    box-shadow: 0 0 16px 0px black;
+    & > span {
+      color: #7ec3da;
+      font-size: 1.8em;
+      text-shadow: none;
+    }
+    & > * {
+      display: block;
+      margin: 10px auto;
+    }
+    & > input {
+      text-align: center;
+      background-color: transparent;
+      border: 2px inset #64cece;
+      color: white;
+      text-shadow: 0 0 2px black;
+      outline: none;
+      &:-webkit-autofill {
+        box-shadow: 0 0 0 30px white inset;
+        text-shadow: none;
+      }
+      &:not([type='submit']) {
+        font-size: 1.1em;
+        width: 50%;
+        min-width: 200px;
+        height: 20px;
+      }
+      &[type='password'] {
+        letter-spacing: 3px;
+      }
+      &[type='submit'] {
+        &:not(:active) {
+          border-style: outset;
+        }
+        &:disabled {
+          border-color: #6f6f6f7d;
+        }
+        padding: 4px 30px;
+        font-size: 1.3em;
+        text-shadow: 0 0 7px #0000007d;
+      }
+    }
+  }
+}

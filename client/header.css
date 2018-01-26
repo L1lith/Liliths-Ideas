@@ -1,0 +1,58 @@
+#mainheader {
+  width: 100%;
+  padding: 10px 0 0 0;
+  margin: 0;
+  overflow: hidden;
+  z-index: 100;
+  position: relative;
+  font-family: 'Raleway', sans-serif;
+}
+#mainheader > nav {
+  padding: 0 10%;
+}
+#mainheader .title {
+  padding: 0 2%;
+  position: relative;
+  background-image: linear-gradient(90deg,#364b73,#0077a5);
+  margin-bottom: -10px;
+  text-align: center;
+  font-size: 3em;
+  font-family: 'Cabin', sans-serif;
+  letter-spacing: 2vw;
+  line-height: 50px;
+}
+#mainheader .title:hover > .glow {
+  border-bottom-color: #59b2dc85;
+  transition: border-bottom-color 0.1s ease, color 0.2s ease;
+}
+#mainheader .title > .glow {
+  transition: border-bottom-color 0.25s ease, color 0.4s ease;
+  width: 100%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: calc(100% - 8px);
+  background-color: #d0ebf3a1;
+  z-index: -10;
+  border-bottom: 3px solid #e4f9ff85;
+  background: linear-gradient(0deg,#a4b7bda1,#d0ebf350,#d0ebf330,#d0ebf315,transparent);
+  border-radius: 16px;
+  width: 80%;
+  margin-left: 10%;
+}
+#mainheader > nav > ul > li a {
+  text-align: center;
+  color: white;
+  font-size: 2.2em;
+  border-bottom: 2px solid #ffffff75;
+  border-radius: 4px;
+  display: inline-block;
+  width: 80%;
+  transition: border-bottom-color 0.25s ease, color 0.4s ease;
+}
+#mainheader > nav > ul > li a:hover {
+  color: #e8f9f9;
+  border-bottom-color: #a1bbea;
+  transition: border-bottom-color 0.1s ease, color 0.2s ease;
+}

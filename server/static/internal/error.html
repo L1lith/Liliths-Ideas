@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      text-align: center;
+      color: white;
+      text-shadow: 0 0 4px black;
+      font-family: cursive;
+    }
+    .background {
+      position: fixed;
+      min-width: 100vw;
+      min-height: 100vh;
+      z-index: -1000;
+    }
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+    a {
+      color: inherit;
+      text-shadow: inherit;
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <img class='background center' src='https://i.imgur.com/0G5nOSG.jpg'/>
+  <div class='center'>
+    <h1>There's been an error.</h1>
+    <a href='/'>Return Home</a>
+  </div>
+</body>
+</html>

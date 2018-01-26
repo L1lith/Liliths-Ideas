@@ -1,0 +1,32 @@
+#mainfooter {
+  border-top: 2px solid black;
+  padding: 10px 0;
+  position: fixed;
+  height: 20px;
+  bottom: 0;
+  text-align: center;
+  width: 100vw;
+  max-height: 20px;
+  background-color: #ffffff26;
+  color: #c1ffffeb;
+  text-shadow: 0 0 2px black;
+}
+#mainfooter > * {
+  margin: 0 100px;
+  width: 75px;
+  vertical-align: top;
+}
+#mainfooter * {
+  display: inline;
+}
+.beforefooter {
+  height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+#mainfooter .discordlink img {
+  max-width: 20px;
+  height: 20px;
+  vertical-align: top;
+  display: inline-block;
+  max-height: 100%;
+}
