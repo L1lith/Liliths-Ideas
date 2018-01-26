@@ -1,15 +1,13 @@
 function sanitize(object,format){
-  if (typeof format == 'object' && !format.type && !format.validate) {
-    if (typeof format != typeof object || Array.isArray(format) != Array.isArray(object)) return false;
-    return Object.entries(object).every(pair=>sanitize(pair[1],format[pair[0]]));
+  if (typeof format == 'object') {
+    if ((format === null) != (object === null) || typeof format != typeof object || Array.isArray(format) != Array.isArray(object)) return false;
+    return Object.entries(object).every(pair=>format.hasOwnProperty(pair[0])&&sanitize(pair[1],format[pair[0]]));
+  } else if (typeof format == 'function') {
+    return format(object) === true;
+  } else if (typeof format == 'string') {
+    return typeof object === format;
   } else {
-    if (typeof format == 'function') {
-      return format(object) === true;
-    } else if (typeof format == 'string') {
-      return typeof object === format;
-    } else {
-      return false;
-    }
+    throw new Error('Invalid Format');
   }
 }
 module.exports = sanitize;
