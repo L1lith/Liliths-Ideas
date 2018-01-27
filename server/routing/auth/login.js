@@ -22,7 +22,7 @@ function login(router, models) {
         if (err) return res.status(500).send('Internal Error');
         if (match === true) {
           giveSession(res, user, models).then(() => {
-            const output = {username:user.username,admin:user.admin};
+            const output = {username:user.username,displayname:user.displayname,admin:user.admin};
             res.status(200).json(output);
           }).catch(err => {
             res.status(500).send('Internal Error');

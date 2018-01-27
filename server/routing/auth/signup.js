@@ -36,7 +36,7 @@ function signup(router, models) {
           username
         };
         giveSession(res, createUser, models).then(() => {
-          const output = {username:createUser.username,admin:createUser.admin};
+          const output = {username:createUser.username,displayname:createUser.displayname,admin:createUser.admin};
           res.status(200).json(output);
         }).catch(err => {
           res.status(500).send('Internal Error');
