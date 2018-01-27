@@ -1,10 +1,14 @@
 module.exports = {
+  title: {
+    type: String,
+    required: true
+  },
   content: {
     type: String,
     required: true
   },
   tags: {
-    type: [String],
+    type: [{type:String,lowercase:true}],
     default: [],
     required: true
   },
