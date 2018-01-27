@@ -22,7 +22,8 @@ function login(router, models) {
         if (err) return res.status(500).send('Internal Error');
         if (match === true) {
           giveSession(res, user, models).then(() => {
-            res.status(200).send('Authorized');
+            const output = {username:user.username,admin:user.admin};
+            res.status(200).json(output);
           }).catch(err => {
             res.status(500).send('Internal Error');
           });
