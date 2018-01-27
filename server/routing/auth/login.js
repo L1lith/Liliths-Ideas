@@ -16,7 +16,7 @@ function login(router, models) {
     User.findOne({
       username
     }, (err, user) => {
-      if (err) return res.status(500).send('Internal Error');
+      if (err) throw err;
       if (!user) return res.status(401).send('Unauthorized');
       bcrypt.compare(password, user.hash, (err, match) => {
         if (err) return res.status(500).send('Internal Error');
