@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Alert from '../components/alert';
 import {Redirect} from 'react-router';
+import {connect} from 'react-redux';
+import {signup} from '@redux/actions/auth';
 
 class Signup extends Component {
   constructor(...args) {
@@ -30,19 +32,16 @@ class Signup extends Component {
       email = this.email.value;
       if (username.length > 0 && password.length > 0 && email.length > 4) {
         this.setState(Object.assign({},this.state,{disabled:true}));
-        fetch('/auth/signup',{method: 'POST',headers:{'Content-Type': 'application/json'},body: JSON.stringify({username,password,email}),credentials:'include'}).then(response=>{
+        this.props.dispatch(signup(username,password,email,(err,response)=>{
+          if (err) return this.error(err);
           response.text().then(text=> {
             if (response.status === 200) {
               this.success(text);
             } else {
               this.failure(text);
-              this.setState(Object.assign({},this.state,{disabled:false}));
             }
           });
-        }).catch(err=>{
-          this.error(err);
-          this.setState(Object.assign({},this.state,{disabled:false}));
-        });
+        }));
       }
     }
   }
@@ -50,11 +49,11 @@ class Signup extends Component {
     this.setState(Object.assign({},this.state,{redirect:'/'}));
   }
   failure(m){
-    this.setState(Object.assign({},this.state,{alert:m ? new Error(m) : new Error('Login Failed')}));
+    this.setState(Object.assign({},this.state,{disabled:false, alert:m ? new Error(m) : new Error('Login Failed')}));
   }
   error(m) {
-    this.setState(Object.assign({},this.state,{alert:m || new Error()}));
+    this.setState(Object.assign({},this.state,{disabled:false, alert:m || new Error()}));
   }
 }
 
-export default [Signup,'/signup'];
+export default [connect(Signup),'/signup'];
