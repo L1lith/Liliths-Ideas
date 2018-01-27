@@ -1,9 +1,22 @@
-function sanitize(object,format){
+function sanitize(object, format) {
   if (typeof format == 'object') {
     if (format === null) return object === null;
-    if (typeof format != typeof object || Array.isArray(format) != Array.isArray(object)) return false;
-    if (Object.keys(object).some(property=>property.startsWith('$'))) return false; // Sanitize for MongoDB
-    return Object.entries(object).every(pair=>format.hasOwnProperty(pair[0])&&sanitize(pair[1],format[pair[0]]));
+    if (typeof format != 'object') {
+      return false;
+    } else if (Array.isArray(format)) {
+      if (!Array.isArray(object)) {
+        return false;
+      } else if (format.length === 0) {
+        return object.length === 0;
+      } else if (format.length === 1) {
+        return object.every((value, index) => sanitize(value, format[0]));
+      } else {
+        return object.every((value, index) => format.hasOwnProperty(index) && sanitize(value, format[index]));
+      }
+    } else {
+      if (Object.keys(object).some(property => property.startsWith('$'))) return false; // Sanitize for MongoDB
+      return Object.entries(object).every(pair => format.hasOwnProperty(pair[0]) && sanitize(pair[1], format[pair[0]]));
+    }
   } else if (typeof format == 'function') {
     return format(object) === true;
   } else if (typeof format == 'string') {

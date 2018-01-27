@@ -1,4 +1,5 @@
 const sanitize = require('../../functions/sanitize');
+const secureRequest = require('../middleware/secureRequest');
 
 function post(app,models){
   const {
@@ -18,8 +19,12 @@ function post(app,models){
     });
   });
   // CREATE POST
+  app.put('/post',secureRequest(models,true));
   app.put('/post',(req,res)=>{
-    
+    const user = res.locals.user;
+    if (user.admin !== true) return res.status(401).send('Unauthorized');
+    const postData = req.body;
+    if (typeof postData == 'object' && sanitize(postData,{title:'string',content:'string',tags:['string']}));
   });
 }
 module.expoets = post;
