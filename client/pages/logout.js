@@ -11,7 +11,7 @@ class Logout extends Component {
   }
   componentWillMount(){
     this.props.dispatch(logout((err,response)=>{
-      if (err) return;
+      if (err) return this.setState({logoutSuccessful:false});;
       if (response.status === 200) {
         this.setState({logoutSuccessful:true});
       } else {

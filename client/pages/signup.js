@@ -56,4 +56,4 @@ class Signup extends Component {
   }
 }
 
-export default [connect(Signup),'/signup'];
+export default [connect()(Signup),'/signup'];
