@@ -10,8 +10,8 @@ function startServer(){
         if (require.main === module) console.log(`Server Listening on Port ${port}`);
         resolve(port);
       });
-    }).catch((err, details) => {
-      reject('Error Requiring Express App');
+    }).catch(err => {
+      reject(err);
     });
   });
 }

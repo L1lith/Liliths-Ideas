@@ -3,11 +3,11 @@ const giveSession = require('../../functions/giveSession');
 const decodeAuth = require('../../functions/decodeAuth');
 const bcrypt = require('bcrypt');
 
-module.exports = function(app, models) {
+function login(router, models) {
   const {
     User
   } = models;
-  app.get('/auth/login', (req, res) => {
+  router.get('/login', (req, res) => {
     const auth = decodeAuth(req);
     if (!auth || auth.length != 2) return res.status(400).send('Malformed Request');
     const username = auth[0].toLowerCase(),
@@ -33,3 +33,4 @@ module.exports = function(app, models) {
     });
   });
 }
+module.exports = login;

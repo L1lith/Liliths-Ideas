@@ -28,7 +28,7 @@ function createServer(){
 
       resolve(app);
     }).catch(err => {
-      reject('Mongoose Error');
+      reject(err);
     });
   });
 }

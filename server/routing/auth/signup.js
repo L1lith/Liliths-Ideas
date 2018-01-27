@@ -3,11 +3,11 @@ const sanitize = require('../../functions/sanitize');
 const getValidEmail = require('../../functions/getValidEmail');
 const bcrypt = require('bcrypt');
 
-module.exports = function(app, models) {
+function signup(router, models) {
   const {
     User
   } = models;
-  app.post('/auth/signup', (req, res) => {
+  router.post('/signup', (req, res) => {
     if (!sanitize(req.body, {
         username: 'string',
         password: 'string',
@@ -44,3 +44,4 @@ module.exports = function(app, models) {
     });
   });
 }
+module.exports = signup;
