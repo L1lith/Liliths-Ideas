@@ -7,11 +7,11 @@ module.exports = {
     path: path.resolve(__dirname, 'server/static/build'),
     filename: 'bundle.js'
   },
-  // resolveLoader: {
-  //   alias: {
-  //     'parsetHtml': path.join(__dirname, 'loaders', 'parseHtml.js')
-  //   }
-  // },
+  resolve: {
+    alias: {
+      "@redux": path.resolve(__dirname, 'client/redux/'),
+    }
+  },
   module: {
     rules: [{
         test: /\.js$/,

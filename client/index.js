@@ -6,7 +6,15 @@ import {
   BrowserRouter
 } from 'react-router-dom'
 
-if (typeof window !== "undefined") {
-  registerServiceWorker();
+if (checkLoaded()) {
+  execute();
+} else {
+  window.addEventListener('load',execute);
+}
+function execute(){
   ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
+  registerServiceWorker();
+}
+function checkLoaded() {
+  return document.readyState === "complete";
 }
