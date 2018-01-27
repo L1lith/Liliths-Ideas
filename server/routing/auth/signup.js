@@ -22,7 +22,7 @@ function signup(router, models) {
     if (username.length < 3 || password.length < 7) return res.status(400).send('Invalid Request');
     email = getValidEmail(email);
     if (!email) return res.status(400).send('Invalid Request');
-    bcrypt.hash(password, 12, (err, hash) => {
+    bcrypt.hash(password, 12, async(err, hash) => {
       if (err) throw err;
       const createUser = new User({
         username,

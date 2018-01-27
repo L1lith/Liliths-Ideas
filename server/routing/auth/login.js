@@ -18,7 +18,7 @@ function login(router, models) {
     }, (err, user) => {
       if (err) throw err;
       if (!user) return res.status(401).send('Unauthorized');
-      bcrypt.compare(password, user.hash, (err, match) => {
+      bcrypt.compare(password, user.hash, async(err, match) => {
         if (err) return res.status(500).send('Internal Error');
         if (match === true) {
           await (giveSession(res, user, models));
