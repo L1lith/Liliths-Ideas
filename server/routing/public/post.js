@@ -24,7 +24,12 @@ function post(app,models){
     const user = res.locals.user;
     if (user.admin !== true) return res.status(401).send('Unauthorized');
     const postData = req.body;
-    if (typeof postData == 'object' && sanitize(postData,{title:'string',content:'string',tags:['string']}));
+    if (typeof postData != 'object' || !sanitize(postData,{title:'string',content:'string',tags:['string']})) return res.status(400).send('Malformed Request');
+    const newPost = new Post(postData);
+    newPost.save((err,post)=>{
+      if (err || !post) return res.status(500).send('Internal Error');
+      res.status(201).send(post._id);
+    });
   });
 }
 module.expoets = post;
