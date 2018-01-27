@@ -21,12 +21,9 @@ function login(router, models) {
       bcrypt.compare(password, user.hash, (err, match) => {
         if (err) return res.status(500).send('Internal Error');
         if (match === true) {
-          giveSession(res, user, models).then(() => {
-            const output = {username:user.username,displayname:user.displayname,admin:user.admin};
-            res.status(200).json(output);
-          }).catch(err => {
-            res.status(500).send('Internal Error');
-          });
+          await (giveSession(res, user, models));
+          const output = {username:user.username,displayname:user.displayname,admin:user.admin};
+          res.status(200).json(output);
         } else {
           res.status(401).send('Unauthorized');
         }

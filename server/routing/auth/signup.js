@@ -23,7 +23,7 @@ function signup(router, models) {
     email = getValidEmail(email);
     if (!email) return res.status(400).send('Invalid Request');
     bcrypt.hash(password, 12, (err, hash) => {
-      if (err) return res.status(500).send('Internal Error');
+      if (err) throw err;
       const createUser = new User({
         username,
         displayname: username,
@@ -31,16 +31,13 @@ function signup(router, models) {
         email
       });
       createUser.save(err => {
-        if (err) return res.status(500).send('Internal Error');
+        if (err) throw err;
         const userOut = {
           username
         };
-        giveSession(res, createUser, models).then(() => {
-          const output = {username:createUser.username,displayname:createUser.displayname,admin:createUser.admin};
-          res.status(200).json(output);
-        }).catch(err => {
-          res.status(500).send('Internal Error');
-        });
+        await (giveSession(res, createUser, models));
+        const output = {username:createUser.username,displayname:createUser.displayname,admin:createUser.admin};
+        res.status(200).json(output);
       });
     });
   });
