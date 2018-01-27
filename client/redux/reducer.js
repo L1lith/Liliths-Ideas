@@ -4,11 +4,11 @@ import * as loginStatus from '@redux/loginStatus';
 const validLoginStatus = Object.values(loginStatus);
 
 function reducer(state, action) {
-  if (typeof state === 'undefined') {
-    return initialState;
+  if (typeof state === 'undefined' || action.type === '@@redux/INIT') {
+    return defaultState;
   }
   switch(action.type) {
-    case actionTypes.setLoginStatus:
+    case setLoginStatus:
       if (!validLoginStatus.includes(action.status)) throw new Error('Invalid Action Login Status')
       return Object.assign({},state,{loginStatus:action.status});
     default:

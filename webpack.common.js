@@ -10,6 +10,7 @@ module.exports = {
   resolve: {
     alias: {
       "@redux": path.resolve(__dirname, 'client/redux/'),
+      "@client": path.resolve(__dirname, 'client/')
     }
   },
   module: {

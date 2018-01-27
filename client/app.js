@@ -6,9 +6,14 @@ import Background from './components/background';
 import Footer from './footer';
 import './app.less';
 import './shapes.css';
+import {connect} from 'react-redux';
+import {validate} from '@redux/actions/auth';
 //import './public/index.html';
 
 class App extends Component {
+  componentWillMount(){
+    this.props.dispatch(validate());
+  }
   render() {
     return (
       <div className="app">
@@ -25,4 +30,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);

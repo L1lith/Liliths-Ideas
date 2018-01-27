@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Alert from '../components/alert';
 import {Redirect} from 'react-router';
+import {login} from '@redux/actions/auth';
+import {connect} from 'react-redux';
 
 class Login extends Component {
   constructor(...args) {
@@ -27,6 +29,7 @@ class Login extends Component {
       password = this.password.value;
       if (username.length > 0 && password.length > 0) {
         this.setState(Object.assign({},this.state,{disabled:true}));
+        this.props.dispatch(login(username,password));
         fetch('/auth/login',{credentials: 'same-origin',headers:{Authorization:'Basic '+btoa(`${username}:${password}`)}}).then(response=>{
           response.text().then(text=> {
             if (response.status === 200) {
@@ -54,4 +57,4 @@ class Login extends Component {
   }
 }
 
-export default [Login,'/login'];
+export default [connect()(Login),'/login'];

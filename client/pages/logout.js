@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {logout} from '@redux/actions/auth';
 import './logout.less';
 
 class Logout extends Component {
@@ -7,17 +9,12 @@ class Logout extends Component {
     super(props);
     this.state = {};
   }
-  componentDidMount(){
-    this.setState({});
-    fetch('/secure/logout',{credentials:'same-origin'}).then(response=>{
-      if (response.status === 200) {
-        this.setState({logoutSuccessful:true});
-      } else {
-        this.setState({logoutSuccessful:false});
+  componentWillMount(){
+    this.props.dispatch(logout(successful=>{
+      if (typeof successful == 'boolean') {
+        this.setState({logoutSuccessful:successful});
       }
-    }).catch(err=>{
-      this.setState({logoutSuccessful:false});
-    });
+    }));
   }
   render(){
     return (
@@ -29,4 +26,4 @@ class Logout extends Component {
   }
 }
 
-export default [Logout,'/logout'];
+export default [connect()(Logout),'/logout'];

@@ -1,5 +1,5 @@
 import {setLoginStatus} from '@redux/actionTypes';
-import {loggedOut} from '@redux/loginStatus';
+import {loggedOut,loggedIn} from '@redux/loginStatus';
 
 export function login(username,password,callback){
   if (callback !== undefined && typeof callback != 'function') throw new Error('Invalid Callback');
@@ -17,4 +17,37 @@ export function login(username,password,callback){
       if (callback) callback(err);
     });
   };
+}
+
+export function logout(callback){
+  if (callback !== undefined && typeof callback != 'function') throw new Error('Invalid Callback');
+  return dispatch => {
+    fetch('/auth/logout',{credentials:'same-origin'}).then(response=>{
+      if (response.status === 200) {
+        dispatch({type:setLoginStatus,status:loggedOut});
+        if (callback) callback(true);
+      } else {
+        if (callback) callback(false);
+      }
+    }).catch(err=>{
+      if (callback) callback(err);
+    });
+  }
+}
+
+export function validate(callback) {
+  if (callback !== undefined && typeof callback != 'function') throw new Error('Invalid Callback');
+  return dispatch => {
+    fetch('/auth/validate').then(response=>{
+      if (response.status === 200) {
+        dispatch({type:setLoginStatus,status:loggedIn});
+        if (callback) callback(true);
+      } else {
+        dispatch({type:setLoginStatus,status:loggedOut});
+        if (callback) callback(false);
+      }
+    }).catch(err=>{
+      if (callback) callback(err);
+    });
+  }
 }
