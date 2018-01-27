@@ -7,7 +7,7 @@ function login(router, models) {
   const {
     User
   } = models;
-  router.get('/login', async(req, res) => {
+  router.get('/login', (req, res) => {
     const auth = decodeAuth(req);
     if (!auth || auth.length != 2) return res.status(400).send('Malformed Request');
     const username = auth[0].toLowerCase(),
@@ -18,16 +18,19 @@ function login(router, models) {
     }, (err, user) => {
       if (err) throw err;
       if (!user) return res.status(401).send('Unauthorized');
-      bcrypt.compare(password, user.hash, async(err, match) => {
+      bcrypt.compare(password, user.hash, (err, match) => {
         if (err) return res.status(500).send('Internal Error');
         if (match === true) {
-          await (giveSession(res, user, models));
-          const output = {
-            username: user.username,
-            displayname: user.displayname,
-            admin: user.admin
-          };
-          res.status(200).json(output);
+          giveSession(res, user, models).then(()=>{
+            const output = {
+              username: user.username,
+              displayname: user.displayname,
+              admin: user.admin
+            };
+            res.status(200).json(output);
+          }).catch(err=>{
+            res.status(500).send('Internal Error');
+          });
         } else {
           res.status(401).send('Unauthorized');
         }

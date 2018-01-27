@@ -7,7 +7,7 @@ function signup(router, models) {
   const {
     User
   } = models;
-  router.post('/signup', async(req, res) => {
+  router.post('/signup', (req, res) => {
     if (!sanitize(req.body, {
         username: 'string',
         password: 'string',
@@ -22,7 +22,7 @@ function signup(router, models) {
     if (username.length < 3 || password.length < 7) return res.status(400).send('Invalid Request');
     email = getValidEmail(email);
     if (!email) return res.status(400).send('Invalid Request');
-    bcrypt.hash(password, 12, async(err, hash) => {
+    bcrypt.hash(password, 12, (err, hash) => {
       if (err) throw err;
       const createUser = new User({
         username,
@@ -35,13 +35,16 @@ function signup(router, models) {
         const userOut = {
           username
         };
-        await (giveSession(res, createUser, models));
-        const output = {
-          username: createUser.username,
-          displayname: createUser.displayname,
-          admin: createUser.admin
-        };
-        res.status(200).json(output);
+        giveSession(res, createUser, models).then(()=>{
+          const output = {
+            username: createUser.username,
+            displayname: createUser.displayname,
+            admin: createUser.admin
+          };
+          res.status(200).json(output);
+        }).catch(err=>{
+          res.status(500).send('Internal Error');
+        });
       });
     });
   });

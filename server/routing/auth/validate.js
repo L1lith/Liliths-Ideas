@@ -4,9 +4,8 @@ function validate(router, models) {
   const {User} = models;
   router.get('/validate', secureRequest(models));
   router.get('/validate', (req, res) => {
-    console.log(res.locals.session);
     User.findOne({username:res.locals.session.owner},user=>{
-      if (!user) throw new Error('Could not find session owner');
+      if (!user) return res.status(500).send('Internal Error');
       const output = {
         username: user.username,
         displayname: user.displayname,
