@@ -10,9 +10,12 @@ class Logout extends Component {
     this.state = {};
   }
   componentWillMount(){
-    this.props.dispatch(logout(successful=>{
-      if (typeof successful == 'boolean') {
-        this.setState({logoutSuccessful:successful});
+    this.props.dispatch(logout((err,response)=>{
+      if (err) return;
+      if (response.status === 200) {
+        this.setState({logoutSuccessful:true});
+      } else {
+        this.setState({logoutSuccessful:false})
       }
     }));
   }

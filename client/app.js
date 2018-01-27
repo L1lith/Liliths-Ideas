@@ -8,6 +8,7 @@ import './app.less';
 import './shapes.css';
 import {connect} from 'react-redux';
 import {validate} from '@redux/actions/auth';
+import {withRouter} from 'react-router-dom';
 //import './public/index.html';
 
 class App extends Component {
@@ -30,4 +31,4 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+export default withRouter(connect()(App));
