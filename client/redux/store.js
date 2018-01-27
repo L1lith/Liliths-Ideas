@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import reducer from './reducer';
+import reducer from '@redux/reducer';
 
 // Note: this API requires redux@>=3.1.0
 const store = createStore(
