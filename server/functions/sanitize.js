@@ -14,7 +14,7 @@ function sanitize(object, format) {
         return object.every((value, index) => format.hasOwnProperty(index) && sanitize(value, format[index]));
       }
     } else {
-      if (Object.keys(object).some(property => property.startsWith('$'))) return false; // Sanitize for MongoDB
+      if (Array.isArray(object) || Object.keys(object).some(property => property.startsWith('$'))) return false; // Sanitize for MongoDB
       return Object.entries(object).every(pair => format.hasOwnProperty(pair[0]) && sanitize(pair[1], format[pair[0]]));
     }
   } else if (typeof format == 'function') {
