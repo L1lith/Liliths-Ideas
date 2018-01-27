@@ -26,10 +26,11 @@ function post(app,models){
     const postData = req.body;
     if (typeof postData != 'object' || !sanitize(postData,{title:'string',content:'string',tags:['string']})) return res.status(400).send('Malformed Request');
     const newPost = new Post(postData);
+    console.log(postData,sanitize(postData,{title:'string',content:'string',tags:['string']}));
     newPost.save((err,post)=>{
       if (err || !post) return res.status(500).send('Internal Error');
       res.status(201).send(post._id);
     });
   });
 }
-module.expoets = post;
+module.exports = post;

@@ -15,7 +15,9 @@ function sanitize(object, format) {
       }
     } else {
       if (Array.isArray(object) || Object.keys(object).some(property => property.startsWith('$'))) return false; // Sanitize for MongoDB
-      return Object.entries(object).every(pair => format.hasOwnProperty(pair[0]) && sanitize(pair[1], format[pair[0]]));
+      const entries = Object.entries(object);
+      if (Object.entries(format).length != entries.length) return false;
+      return entries.every(pair => format.hasOwnProperty(pair[0]) && sanitize(pair[1], format[pair[0]]));
     }
   } else if (typeof format == 'function') {
     return format(object) === true;
