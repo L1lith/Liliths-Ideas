@@ -18,8 +18,9 @@ function signup(router, models) {
       password,
       email
     } = req.body;
+    username = username.split(' ').join('');
     const displayname = username;
-    username = username.toLowerCase().split(' ').join('');
+    username = username.toLowerCase();
     if (username.length < 3 || password.length < 7) return res.status(400).send('Invalid Request');
     email = getValidEmail(email);
     if (!email) return res.status(400).send('Invalid Request');

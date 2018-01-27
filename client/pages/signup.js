@@ -34,25 +34,23 @@ class Signup extends Component {
         this.setState(Object.assign({},this.state,{disabled:true}));
         this.props.dispatch(signup(username,password,email,(err,response)=>{
           if (err) return this.error(err);
-          response.text().then(text=> {
-            if (response.status === 200) {
-              this.success(text);
-            } else {
-              this.failure(text);
-            }
-          });
+          if (response.status === 200) {
+            this.success();
+          } else {
+            this.failure();
+          }
         }));
       }
     }
   }
-  success(m){
+  success(){
     this.setState(Object.assign({},this.state,{redirect:'/'}));
   }
-  failure(m){
-    this.setState(Object.assign({},this.state,{disabled:false, alert:m ? new Error(m) : new Error('Login Failed')}));
+  failure(){
+    this.setState(Object.assign({},this.state,{disabled:false, alert:new Error('Login Failed')}));
   }
   error(m) {
-    this.setState(Object.assign({},this.state,{disabled:false, alert:m || new Error()}));
+    this.setState(Object.assign({},this.state,{disabled:false, alert:new Error('Communication Error')}));
   }
 }
 
