@@ -22,7 +22,11 @@ function login(router, models) {
         if (err) return res.status(500).send('Internal Error');
         if (match === true) {
           await (giveSession(res, user, models));
-          const output = {username:user.username,displayname:user.displayname,admin:user.admin};
+          const output = {
+            username: user.username,
+            displayname: user.displayname,
+            admin: user.admin
+          };
           res.status(200).json(output);
         } else {
           res.status(401).send('Unauthorized');

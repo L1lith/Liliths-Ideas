@@ -36,7 +36,11 @@ function signup(router, models) {
           username
         };
         await (giveSession(res, createUser, models));
-        const output = {username:createUser.username,displayname:createUser.displayname,admin:createUser.admin};
+        const output = {
+          username: createUser.username,
+          displayname: createUser.displayname,
+          admin: createUser.admin
+        };
         res.status(200).json(output);
       });
     });
