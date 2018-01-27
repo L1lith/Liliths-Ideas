@@ -10,12 +10,12 @@ function reducer(state, action) {
   switch(action.type) {
     case setLoginStatus:
       if (!validLoginStatus.includes(action.status)) throw new Error('Invalid Action Login Status');
-
-      if (action.status === loginStatus.loggedIn) {
-        return Object.assign({},state,{loginStatus:action.status,user:action.user});
-      } else {
-        return Object.assign({},state,{loginStatus:action.status,user:null});
-      }
+      return Object.assign({},state,{loginStatus:action.status,user:action.status === loginStatus.loggedIn ? action.user : null});
+      // if (action.status === loginStatus.loggedIn) {
+      //   return Object.assign({},state,{loginStatus:action.status,user:action.user});
+      // } else {
+      //   return Object.assign({},state,{loginStatus:action.status,user:null});
+      // }
     default:
       return state;
   }
