@@ -10,14 +10,13 @@ class Footer extends Component {
   render(){
     return (
       <footer id='mainfooter'>
-      {
+        {
         this.props.location.pathname === '/login' ?
         <Link to='/signup' className='signup'>Signup</Link> :
         this.props && this.props.loginStatus && this.props.loginStatus === loggedIn ?
-        <Link to='/logout' className='logout'>Logout</Link> :
+        <Link to='/logout' className='logout'>Logout {this.props.user.displayname}</Link> :
         <Link to='/login' className='login'>Login</Link>
-
-      }
+        }
 
         <Link to='/contact' className='contact'>Contact</Link>
       </footer>
@@ -26,5 +25,5 @@ class Footer extends Component {
 }
 
 export default withRouter(connect(state=>{
-  return {loginStatus:state.loginStatus}
+  return {loginStatus:state.loginStatus,user:state.user}
 })(Footer));
