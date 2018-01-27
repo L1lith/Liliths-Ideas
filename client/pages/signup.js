@@ -15,12 +15,12 @@ class Signup extends Component {
     return (
       <form id='sign' onSubmit={e=>{e.preventDefault();this.submit(e);}}>
         <Alert content={this.state.alert}/>
-        <span className='username'>Username</span>
-        <input required ref={ref=>{this.username = ref;}} name='username' type='text' className='username' autoComplete='username'/>
-        <span className='password'>Password</span>
-        <input required ref={ref=>{this.password = ref;}} name='password' type='password' className='password' autoComplete='password'/>
-        <span className='email'>Email</span>
-        <input required ref={ref=>{this.email = ref;}} name='email' type='email' className='email' autoComplete='email'/>
+        <label htmlFor='username' className='username'>Username</label>
+        <input id='username' required ref={ref=>{this.username = ref;}} name='username' type='text' className='username' autoComplete='username'/>
+        <label htmlFor='password' className='password'>Password</label>
+        <input id='password' required ref={ref=>{this.password = ref;}} name='password' type='password' className='password' autoComplete='password'/>
+        <label htmlFor='email' className='email'>Email</label>
+        <input id='email' required ref={ref=>{this.email = ref;}} name='email' type='email' className='email' autoComplete='email'/>
         <input type='submit' value='Signup' disabled={this.state.disabled === true} />
       </form>
     );
