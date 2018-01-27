@@ -6,7 +6,9 @@ export function login(username,password,callback){
   return dispatch => {
     fetch('/auth/login',{credentials: 'same-origin',headers:{Authorization:'Basic '+btoa(`${username}:${password}`)}}).then(response=>{
       if (response.status === 200) {
-        dispatch({type:setLoginStatus,status:loggedIn});
+        response.json().then(user => {
+          dispatch({type:setLoginStatus,status:loggedIn,user});
+        });
       } else {
         dispatch({type:setLoginStatus,status:loggedOut});
       }
@@ -37,7 +39,9 @@ export function validate(callback) {
   return dispatch => {
     fetch('/auth/validate',{credentials:'same-origin'}).then(response=>{
       if (response.status === 200) {
-        dispatch({type:setLoginStatus,status:loggedIn});
+        response.json().then(user => {
+          dispatch({type:setLoginStatus,status:loggedIn,user});
+        });
       } else {
         dispatch({type:setLoginStatus,status:loggedOut});
       }
@@ -54,8 +58,9 @@ export function signup(username,password,email,callback){
   return dispatch => {
     fetch('/auth/signup',{method: 'POST',headers:{'Content-Type': 'application/json'},body: JSON.stringify({username,password,email}),credentials:'same-origin'}).then(response=>{
       if (response.status === 200) {
-        dispatch({type:setLoginStatus,status:loggedIn});
-
+        response.json().then(user => {
+          dispatch({type:setLoginStatus,status:loggedIn,user});
+        });
       } else {
         dispatch({type:setLoginStatus,status:loggedOut});
       }

@@ -9,10 +9,17 @@ function reducer(state, action) {
   }
   switch(action.type) {
     case setLoginStatus:
-      if (!validLoginStatus.includes(action.status)) throw new Error('Invalid Action Login Status')
-      return Object.assign({},state,{loginStatus:action.status});
+      if (!validLoginStatus.includes(action.status)) throw new Error('Invalid Action Login Status');
+
+      if (action.status === loginStatus.loggedIn) {
+        return Object.assign({},state,{loginStatus:action.status,user:action.user});
+      } else {
+        return Object.assign({},state,{loginStatus:action.status,user:null});
+      }
     default:
       return state;
   }
 }
+// Logger wraps reducer for debugging purposes
+const logger = (...args)=>{const output = reducer(...args);console.log('new state',output);return output};
 export default reducer;
