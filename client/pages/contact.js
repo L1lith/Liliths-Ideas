@@ -8,6 +8,7 @@ class Contact extends Component {
         <input id='subject' name='subject' type='text'/>
         <label for='subject'>Message</label>
         <textarea id='message' name='message'/>
+        <input type='submit' value='Send'/>
       </form>
     );
   }
