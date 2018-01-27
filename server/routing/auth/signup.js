@@ -7,7 +7,7 @@ function signup(router, models) {
   const {
     User
   } = models;
-  router.post('/signup', (req, res) => {
+  router.post('/signup', async(req, res) => {
     if (!sanitize(req.body, {
         username: 'string',
         password: 'string',

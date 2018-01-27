@@ -7,7 +7,7 @@ module.exports = function(models) {
       Session.findOne({
         _id: session
       }, (err, result) => {
-        if (err) return res.status(500).send('Internal Error');
+        if (err) throw err;
         if (!result) return res.status(401).send('Unauthorized')
         res.locals.session = result;
         next();

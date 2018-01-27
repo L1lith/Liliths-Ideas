@@ -7,7 +7,7 @@ function login(router, models) {
   const {
     User
   } = models;
-  router.get('/login', (req, res) => {
+  router.get('/login', async(req, res) => {
     const auth = decodeAuth(req);
     if (!auth || auth.length != 2) return res.status(400).send('Malformed Request');
     const username = auth[0].toLowerCase(),
