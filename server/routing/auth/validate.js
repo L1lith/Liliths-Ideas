@@ -4,8 +4,8 @@ function validate(router, models) {
   const {User} = models;
   router.get('/validate', secureRequest(models));
   router.get('/validate', (req, res) => {
-    User.findOne({username:res.locals.session.owner},user=>{
-      if (!user) return res.status(500).send('Internal Error');
+    User.findOne({username:res.locals.session.owner},(err,user)=>{
+      if (err || !user) return res.status(500).send('Internal Error');
       const output = {
         username: user.username,
         displayname: user.displayname,
