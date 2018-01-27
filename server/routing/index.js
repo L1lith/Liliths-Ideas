@@ -5,9 +5,9 @@ const defaultPage = require('./defaultPage');
 const catchError = require('./catchError');
 
 module.exports = function(app,models){
+  auth(app,models);
   secure(app,models);
   pub(app,models);
   defaultPage(app);
-  auth(app,models);
   catchError(app);
 }

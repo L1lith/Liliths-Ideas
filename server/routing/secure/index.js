@@ -1,7 +1,6 @@
 const express = require('express');
 const secureRequest = require('../middleware/secureRequest');
 const stat = require('./static');
-const {Router} = express;
 
 
 module.exports = function(app,models){
