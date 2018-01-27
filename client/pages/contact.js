@@ -4,8 +4,10 @@ class Contact extends Component {
   render(){
     return (
       <form id='contact'>
-        <h1>Contact</h1>
-        <input name='subject' type='text'/>
+        <label for='subject'>Subject</label>
+        <input id='subject' name='subject' type='text'/>
+        <label for='subject'>Message</label>
+        <textarea id='message' name='message'/>
       </form>
     );
   }
