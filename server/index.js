@@ -4,7 +4,7 @@ const spdy = require('spdy');
 const port = require('./config').port || 8000;
 
 if (require.main === module) {
-  await (startServer());
+  startServer();
 }
 
 function startServer(){
