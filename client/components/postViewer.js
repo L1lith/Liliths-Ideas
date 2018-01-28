@@ -12,7 +12,7 @@ class PostViewer extends Component {
     if (!post) return null;
     return (
       <div className='postviewer' id='postviewer'>
-        <h1>{post.title}</h1>
+        <h1 className='title'>{post.title}</h1>
         <div className='content' dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(post.content)}}/>
       </div>
     );
