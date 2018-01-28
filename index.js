@@ -19,16 +19,15 @@ function startWebpack() {
   console.log('Starting Webpack');
   if (isDevelopment) {
     compiler.watch({},built);
-    startServer();
   } else {
     compiler.run(built);
   }
+  doStartServer();
 }
 
 function built(err,stats){
   if (err /*|| stats.hasErrors()*/) throw (err /*|| new Error("Couldn't Start, Webpack Error")*/);
   console.log('Webpack Built');
-  if (!isDevelopment) doStartServer();
 }
 
 var serverStarted = false;
