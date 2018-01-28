@@ -32,6 +32,7 @@
     "ignore-loader": "^0.1.2",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
+    "letsencrypt-express": "^2.0.6",
     "loader-utils": "^1.1.0",
     "minimist": "^1.2.0",
     "mongoose": "^5.0.1",
