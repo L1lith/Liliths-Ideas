@@ -15,7 +15,6 @@ import {withRouter} from 'react-router-dom';
 class App extends Component {
   componentWillMount(){
     this.props.dispatch(validate());
-    this.props.dispatch(getFrontPage());
   }
   render() {
     return (

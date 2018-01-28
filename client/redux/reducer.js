@@ -20,7 +20,11 @@ function reducer(state, action) {
       const newFrontPages = state.frontPages.slice(0);
       newFrontPages[action.pageNumber - 1] = action.pages.map(page=>page.id);
       savePages(...action.pages);
-      return Object.assign({},state,{frontPages:newFrontPages});
+      const newPages = Object.assign({},state.pages);
+      action.pages.forEach(page=>{
+        newPages[page.id] = page;
+      });
+      return Object.assign({},state,{pages:newPages,frontPages:newFrontPages});
     default:
       return state;
   }
