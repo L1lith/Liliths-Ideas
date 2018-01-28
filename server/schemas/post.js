@@ -16,5 +16,10 @@ module.exports = {
     type: Date,
     default: Date.now,
     required: true
+  },
+  creator: {
+    type: String,
+    required:true,
+    lowercase:true
   }
 }
