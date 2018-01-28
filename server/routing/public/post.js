@@ -11,7 +11,7 @@ function post(app,models){
     const searchID = req.query.id;
     if (typeof searchID != 'string' || searchID.length < 1) return res.status(400).send('Malformed Request');
     const post = res.locals.post;
-    res.status(200).json({title:post.title,content:post.content,created:post.createdAt,tags:post.tags});
+    res.status(200).json({id:post._id,title:post.title,content:post.content,creator:post.creator,created:post.createdAt,tags:post.tags,version:post.__v});
   });
   // CREATE POST
   app.put('/post',secureRequest(models,true));
