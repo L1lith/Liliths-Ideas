@@ -23,7 +23,7 @@ function post(app,models){
     const newPost = new Post(Object.assign({},postData,{creator:res.locals.user.username}));
     newPost.save((err,post)=>{
       if (err || !post) return res.status(500).send('Internal Error');
-      res.status(201).sent(post._id);
+      res.status(201).send(post._id);
     });
   });
   app.delete('/post',secureRequest(models,true));
