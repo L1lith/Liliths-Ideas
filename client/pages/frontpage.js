@@ -3,11 +3,12 @@ import './frontpage.less';
 import {connect} from 'react-redux';
 import Alert from '@components/alert';
 import {getFrontPage} from '@redux/actions/posts';
+import PostViewer from '@components/postViewer';
 
 class FrontPage extends Component {
   constructor(props){
     super(props);
-    this.state = {loading:true};
+    this.state = {loading:true,pageNumber:1,postNumber:1};
   }
   componentWillMount(){
     this.props.dispatch(getFrontPage(undefined,error=>{
@@ -18,6 +19,11 @@ class FrontPage extends Component {
     return (
       <div className='frontpage'>
         <Alert error={this.state.error}/>
+        {this.props.frontPages[this.state.pageNumber - 1] ?
+          (
+            <PostViewer id={this.props.frontPages[this.state.pageNumber - 1][this.state.postNumber - 1]}/>
+          )
+        : null}
       </div>
     );
   }

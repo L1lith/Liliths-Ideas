@@ -11,7 +11,7 @@ export function getFrontPage(pageNumber,callback){
     fetch('/frontpage'+ (typeof pageNumber == 'number' ? `?pageNumber=${pageNumber}` : '')).then(response=>{
       if (response.status === 200) {
         response.json().then(function(data) {
-          dispatch({type:setFrontPage,pages:data,pageNumber:(typeof pageNumber == 'number' ? pageNumber : 1)});
+          dispatch({type:setFrontPage,posts:data,pageNumber:(typeof pageNumber == 'number' ? pageNumber : 1)});
           if (typeof callback == 'function') callback(null);
         });
       } else {

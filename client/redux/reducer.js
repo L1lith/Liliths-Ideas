@@ -18,21 +18,21 @@ function reducer(state, action) {
       // }
     case setFrontPage:
       const newFrontPages = state.frontPages.slice(0);
-      newFrontPages[action.pageNumber - 1] = action.pages.map(page=>page.id);
-      savePages(...action.pages);
-      const newPages = Object.assign({},state.pages);
-      action.pages.forEach(page=>{
-        newPages[page.id] = page;
+      newFrontPages[action.pageNumber - 1] = action.posts.map(post=>post.id);
+      savePages(...action.posts);
+      const newPosts = Object.assign({},state.posts);
+      action.posts.forEach(post=>{
+        newPosts[post.id] = post;
       });
-      return Object.assign({},state,{pages:newPages,frontPages:newFrontPages});
+      return Object.assign({},state,{posts:newPosts,frontPages:newFrontPages});
     default:
       return state;
   }
 }
 
-function savePages(...pages) {
-  pages.forEach(page=>{
-    localStorage['post#'+page.id] = JSON.stringify(page);
+function savePages(...posts) {
+  posts.forEach(post=>{
+    localStorage['post#'+post.id] = JSON.stringify(post);
   });
 }
 
