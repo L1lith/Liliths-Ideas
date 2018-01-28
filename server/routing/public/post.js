@@ -1,7 +1,7 @@
 const sanitize = require('../../functions/sanitize');
 const secureRequest = require('../middleware/secureRequest');
 
-function post(app,models){
+function post(app,models,addCategories){
   const {
     Post
   } = models;
@@ -23,6 +23,7 @@ function post(app,models){
     const newPost = new Post(Object.assign({},postData,{creator:res.locals.user.username}));
     newPost.save((err,post)=>{
       if (err || !post) return res.status(500).send('Internal Error');
+      if (newPost.tags.length > 0) addCategories(newPost.tags);
       res.status(201).send(post._id.toString());
     });
   });
