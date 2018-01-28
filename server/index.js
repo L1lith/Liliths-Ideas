@@ -1,7 +1,9 @@
-const LEX = require('letsencrypt-express');
+const letsencryptExpress = require('letsencrypt-express');
 const createApp = require('./app');
 const config = require('./config') || {};
 const port = config.port || 8000;
+const http = require('http');
+const http2 = require('http2');
 
 if (require.main === module) {
   startServer();
@@ -18,15 +20,23 @@ function startServer() {
         });
       } else {
         console.log('Starting LEX');
-        const server = LEX.create({
+        const LEXConfig = {
           server: 'staging',
           email: config.email,
           agreeTos: true,
           approveDomains: config.domains || [],
           app
+        }
+        const lex = letsencryptExpress(LEXConfig);
+        const httpServer = http.createServer(lex.middleware(require('redirect-https')()));
+        const httpsServer = http2.createServer(lex.httpsOptions, lex.middleware(app));
+        httpServer.listen(80, function () {
+          console.log("Listening for ACME http-01 challenges on", this.address());
         });
-        server.listen(80, 443);
-        resolve(server);
+        httpsServer.listen(443, function () {
+          console.log("Listening for ACME tls-sni-01 challenges and serve app on", this.address());
+        });
+        resolve(httpsServer);
       }
     }).catch(err => {
       reject(err);
