@@ -6,17 +6,12 @@ function post(app,models){
     Post
   } = models;
   // GET POST
+  app.get('/post',withPost(models));
   app.get('/post',(req,res)=>{
     const searchID = req.query.id;
     if (typeof searchID != 'string' || searchID.length < 1) return res.status(400).send('Malformed Request');
-    Post.find({_id:searchID},(err,post)=>{
-      if (err) return res.status(500).send('Internal Error');
-      if (post) {
-        res.status(200).json({title:post.title,content:post.content,created:post.createdAt,tags:post.tags});
-      } else {
-        res.status(404).send('Post Not Found');
-      }
-    });
+    const post = res.locals.post;
+    res.status(200).json({title:post.title,content:post.content,created:post.createdAt,tags:post.tags});
   });
   // CREATE POST
   app.put('/post',secureRequest(models,true));
@@ -31,5 +26,24 @@ function post(app,models){
       res.status(201).sent(post._id);
     });
   });
+  app.delete('/post',withPost());
+  app.delete('/post',(req,res)=>{
+    res.post.remove(err=>{
+      if (err) return res.status(500).send('Internal Error');
+      res.status(200).send('Deleted');
+    });
+  });
+}
+function withPost(models){
+  return (req,res,next)=>{
+    if (!req.locals.user || !req.locals.session) throw new Error('Post: Invalid Res Local Session/User');
+    if (typeof req.query.id != 'string' || req.query.id.length < 1) return res.status(400).send('Malformed Request');
+    Post.findOne({_id:req.query.id},(err,post)=>{
+      if (err) return res.status(500).send('Internal Error');
+      if (!post) return res.status(404).send('Post Not Found');
+      res.locals.post = post;
+      next();
+    });
+  }
 }
 module.exports = post;
