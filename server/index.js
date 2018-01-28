@@ -1,7 +1,7 @@
 const LEX = require('letsencrypt-express');
 const createApp = require('./app');
-
-const port = require('./config').port || 8000;
+const config = require('./config') || {};
+const port = config.port || 8000;
 
 if (require.main === module) {
   startServer();
@@ -20,10 +20,9 @@ function startServer() {
         console.log('Starting LEX');
         const server = LEX.create({
           server: 'staging',
-          email: 'lily@lillith.pw',
+          email: config.email,
           agreeTos: true,
-          approveDomains: [
-          ],
+          approveDomains: config.domains || [],
           app
         });
         server.listen(80, 443);
