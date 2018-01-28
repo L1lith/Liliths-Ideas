@@ -1,5 +1,10 @@
 const sanitize = require('../../functions/sanitize');
 const secureRequest = require('../middleware/secureRequest');
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+
+const window = (new JSDOM('')).window;
+const DOMPurify = createDOMPurify(window);
 
 function post(app,models,addCategories){
   const {
@@ -19,6 +24,7 @@ function post(app,models,addCategories){
     const user = res.locals.user;
     if (user.admin !== true) return res.status(401).send('Unauthorized');
     const postData = req.body;
+    postData.content = DOMPurify.sanitize(postData.content);
     if (typeof postData != 'object' || !sanitize(postData,{title:'string',content:'string',tags:['string']})) return res.status(400).send('Malformed Request');
     const newPost = new Post(Object.assign({},postData,{creator:res.locals.user.username}));
     newPost.save((err,post)=>{
