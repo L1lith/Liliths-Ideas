@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const routing = require('./routing');
 const cookieParser = require('cookie-parser');
 const getModels = require('./models');
+const httpsRedirect = require('express-https-redirect');
 
 let resolve;
 let reject;
@@ -22,6 +23,9 @@ function createApp(){
 
       //app.use(forceSSL);
       app.use(helmet());
+      if (process.env.NODE_ENV === 'production') {
+        app.use(httpsRedirect);
+      }
       app.use(bodyParser.json());
       app.use(cookieParser());
       routing(app, models);
