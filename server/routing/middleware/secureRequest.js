@@ -13,6 +13,7 @@ module.exports = function(models,withUser=false) {
         if (withUser === true) {
           User.findOne({username:result.owner},(err,user)=>{
             if (err || !user) return res.status(500).send('Internal Error');
+            if (user.banned === true) return res.status(403).send('Banned');
             res.locals.user = user;
             next();
           });
