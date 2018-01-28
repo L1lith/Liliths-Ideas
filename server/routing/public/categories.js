@@ -10,7 +10,10 @@ module.exports = function(app,models){
   });
   Post.distinct('tags', (err, result) => {
     if (err) throw err;
-    categories = result;
+    categories = categories ? mergeArrays(categories,result) : result;
   });
-  return arr=>{if(!Array.isArray(arr)) throw new Error('Invalid Array to Merge');let newArray = mergeArrays(arr,categories); if (newArray.length > categories.length) categories = newArray;}
+  return arr => {
+    if (!Array.isArray(arr)) throw new Error('Invalid Array to Merge');
+    categories = categories ? mergeArrays(categories,arr) : arr;
+  }
 }
