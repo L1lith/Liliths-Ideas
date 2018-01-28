@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 
 class FrontPage extends Component {
   render(){
-    return this.props.frontPage;
+    return <p>FrontPage</p>;
   }
 }
 
-export default [connect(state=>{frontPage:state.frontPage})(FrontPage),'/',{exact:true}];
+export default [connect(state=>{return {frontPage:state.frontPage}})(FrontPage),'/',{exact:true}];

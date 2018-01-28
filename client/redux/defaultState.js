@@ -1,4 +1,5 @@
 import {initializing} from '@redux/loginStatus';
 export default {
-  loginStatus: initializing
+  loginStatus: initializing,
+  frontPages: []
 }
