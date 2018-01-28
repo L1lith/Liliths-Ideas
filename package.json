@@ -41,6 +41,7 @@
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "spdy": "^3.4.7",
     "style-loader": "^0.19.1",
     "thunk": "0.0.1",
     "uglifyjs-webpack-plugin": "^1.1.6",

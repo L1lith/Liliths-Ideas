@@ -14,7 +14,7 @@ const successful = new Promise((res, rej) => {
   reject = rej;
 });
 
-function createServer(){
+function createApp(){
   return new Promise((resolve,reject)=>{
     getModels().then(models => {
 
@@ -33,4 +33,4 @@ function createServer(){
   });
 }
 
-module.exports = createServer;
+module.exports = createApp;
