@@ -26,17 +26,21 @@ function post(app,models){
       res.status(201).sent(post._id);
     });
   });
-  app.delete('/post',withPost());
+  app.delete('/post',secureRequest(models,true));
+  app.delete('/post',withPost(models));
   app.delete('/post',(req,res)=>{
-    res.post.remove(err=>{
+    if (res.locals.user.admin !== true) return res.status(401).send('Unauthorized');
+    res.locals.post.remove(err=>{
       if (err) return res.status(500).send('Internal Error');
       res.status(200).send('Deleted');
     });
   });
 }
 function withPost(models){
+  const {
+    Post
+  } = models;
   return (req,res,next)=>{
-    if (!req.locals.user || !req.locals.session) throw new Error('Post: Invalid Res Local Session/User');
     if (typeof req.query.id != 'string' || req.query.id.length < 1) return res.status(400).send('Malformed Request');
     Post.findOne({_id:req.query.id},(err,post)=>{
       if (err) return res.status(500).send('Internal Error');
