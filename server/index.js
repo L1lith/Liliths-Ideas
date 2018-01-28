@@ -27,7 +27,7 @@ function startServer() {
           approveDomains: config.domains || [],
           app
         }
-        const lex = letsencryptExpress(LEXConfig);
+        const lex = letsencryptExpress.create(LEXConfig);
         const httpServer = http.createServer(lex.middleware(require('redirect-https')()));
         const httpsServer = http2.createServer(lex.httpsOptions, lex.middleware(app));
         httpServer.listen(80, function () {
