@@ -10,7 +10,7 @@ module.exports = (app,models)=>{
     if (pageNumber < 1) return res.status(400).send('Malformed Request');
     Post.find().skip((pageNumber - 1 ) * resultsPerPage).limit(resultsPerPage).exec((err,posts)=>{
       if (err) return res.status(500).send('Internal Error');
-      res.status(200).send(posts.map(post=>{return {title:post.title,content:post.content,creator:post.creator,created:post.createdAt,tags:post.tags}}));
+      res.status(200).send(posts.map(post=>{return {id:post._id,title:post.title,content:post.content,creator:post.creator,created:post.createdAt,tags:post.tags,version:post.__v}}));
     });
   });
 }
