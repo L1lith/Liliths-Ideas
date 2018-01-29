@@ -6,14 +6,14 @@ function sanitize(object, format,options={}) {
   if (options.hasOwnProperty('_')) {
     const newOptions = Object.assign({},options);
     delete newOptions['_'];
-    return sanitize(object,options['_'],newFormat);
+    return sanitize(object,options['_'],newOptions);
   }
   if (typeof options.validate == 'function') {
-    const newOptions = object.assign({},options);
+    const newOptions = Object.assign({},options);
     delete newOptions.validate;
     return options.validate(object) && sanitize(object,format,newOptions);
   } else if (Array.isArray(options.validate)) {
-    const newOptions = object.assign({},options);
+    const newOptions = Object.assign({},options);
     delete newOptions.validate;
     return sanitize(object,format,newOptions) && options.validate.filter(func=>typeof func == 'function').every(func=>func(object)===true);
   }
