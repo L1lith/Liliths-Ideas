@@ -3,7 +3,7 @@ const secureRequest = require('../middleware/secureRequest');
 const createDOMPurify = require('dompurify');
 const { JSDOM } = require('jsdom');
 
-const window = (new JSDOM('')).window;
+const {window} = (new JSDOM(''));
 const DOMPurify = createDOMPurify(window);
 
 function post(app,models,addCategories){
