@@ -40,7 +40,7 @@ function sanitize(object, format,options={}) {
         const name = pair[0];
         const value = pair[1];
         if (format.hasOwnProperty(name)) {
-          return sanitize(pair[1], format[pair[0]]);
+          return sanitize(value, format[name]);
         } else if (format.hasOwnProperty('$'+name)) {
           const options = format['$'+name];
           const newOptions = Object.assign({},options);
