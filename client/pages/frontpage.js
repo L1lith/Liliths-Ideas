@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './frontpage.less';
 import {connect} from 'react-redux';
 import Alert from '@components/alert';
-import {getFrontPage} from '@redux/actions/posts';
 import PostViewer from '@components/postViewer';
 
 class FrontPage extends Component {
@@ -10,11 +9,6 @@ class FrontPage extends Component {
     super(props);
     this.state = {loading:true,pageNumber:1,postNumber:1};
     ['last','next'].forEach(property=>{this[property] = this[property].bind(this);});
-  }
-  componentWillMount(){
-    this.props.dispatch(getFrontPage(undefined,error=>{
-      if (error) return this.setState(Object.assign({},this.state,{error}));
-    }));
   }
   render(){
     return (
