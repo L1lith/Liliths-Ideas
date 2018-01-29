@@ -28,6 +28,7 @@
     "express": "^4.16.2",
     "express-force-ssl": "^0.3.2",
     "express-https-redirect": "^1.0.0",
+    "express-rate-limit": "^2.11.0",
     "helmet": "^3.9.0",
     "html-webpack-plugin": "^2.30.1",
     "http2": "^3.3.7",
