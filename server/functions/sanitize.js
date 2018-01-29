@@ -3,10 +3,10 @@ function sanitize(object, format,options={}) {
   if (options) options = Object.assign({
     arrayAssume:true,
   },options);
-  if (options.hasOwnProperty('format')) {
+  if (options.hasOwnProperty('_')) {
     const newOptions = Object.assign({},options);
-    delete newOptions.format;
-    return sanitize(object,options.format,newFormat);
+    delete newOptions['_'];
+    return sanitize(object,options['_'],newFormat);
   }
   if (typeof options.validate == 'function') {
     const newOptions = object.assign({},options);
@@ -44,8 +44,8 @@ function sanitize(object, format,options={}) {
         } else if (format.hasOwnProperty('$'+name)) {
           const options = format['$'+name];
           const newOptions = Object.assign({},options);
-          delete newOptions.format;
-          return sanitize(pair[1],options.format,newOptions);
+          delete newOptions['_'];
+          return sanitize(pair[1],options['_'],newOptions);
         } else {
           return false;
         }
