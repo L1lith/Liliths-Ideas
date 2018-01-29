@@ -29,7 +29,6 @@ class FrontPage extends Component {
     );
   }
   last(){
-    console.log('last');
     const posts = this.props.frontPages[this.state.pageNumber - 1];
     const newPostNumber = this.state.postNumber - 1;
     console.log(newPostNumber);
@@ -38,7 +37,6 @@ class FrontPage extends Component {
     }
   }
   next(){
-    console.log('next');
     const posts = this.props.frontPages[this.state.pageNumber - 1];
     const newPostNumber = this.state.postNumber + 1;
     if (newPostNumber <= posts.length) {
