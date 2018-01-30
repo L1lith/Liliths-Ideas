@@ -8,8 +8,11 @@ module.exports = function(app,models){
   let images = null;
   fs.readdir(imageDir,(err,results)=>{
     if (err) return;
-    if (results && results.length > 0) {
-      images = results;
+    if (results) {
+      results = results.filter(name=>name!=='.gitignore');
+      if (results.length > 0) {
+        images = results;
+      }
     }
   });
   app.use('/backgrounds',express.static(imageDir,{maxAge: 1000 * 60 * 60 * 24 * 365 * 10}));
