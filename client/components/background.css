@@ -3,12 +3,13 @@
   z-index: -500;
   top: 50%;
   left: 50%;
-  min-width: 100vw;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   opacity: 0;
   user-select: none;
   transform: translate(-50%, -50%);
   transition: opacity 5s ease;
   visibility: hidden;
+  background-size: cover;
   /* filter: blur(0.7px); */
 }

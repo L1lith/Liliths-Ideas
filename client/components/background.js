@@ -14,7 +14,7 @@ class Background extends Component {
   render(){
     if (!this.state || typeof this.state.backgroundURL != 'string') return null;
     return (
-      <img ref={ref=>{setTimeout(()=>{ref.style.opacity = 1;ref.style.visibility='visible';},1)}} id='mainbackground' src={this.state.backgroundURL}/>
+      <div style={{backgroundImage:"url("+this.state.backgroundURL+')'}} ref={ref=>{setTimeout(()=>{ref.style.opacity = 1;ref.style.visibility='visible';},100)}} id='mainbackground'/>
     );
   }
 }
