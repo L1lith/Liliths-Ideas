@@ -14,7 +14,7 @@ module.exports = function(app,models){
     res.status(200).send(Math.floor(postCount / 10));
   });
   return {
-    up:()=>if(postCount !== null) postCount++,
-    down:()=>if(postCount !== null) postCount--
+    up:()=>{if(postCount !== null) postCount++},
+    down:()=>{if(postCount !== null) postCount--}
   }
 }
