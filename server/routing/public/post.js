@@ -6,7 +6,7 @@ const { JSDOM } = require('jsdom');
 const {window} = (new JSDOM(''));
 const DOMPurify = createDOMPurify(window);
 
-function post(app,models,addCategories){
+function post(app,models,addCategories,postNumber){
   const {
     Post
   } = models;
@@ -30,6 +30,7 @@ function post(app,models,addCategories){
     newPost.save((err,post)=>{
       if (err || !post) return res.status(500).send('Internal Error');
       if (newPost.tags.length > 0) addCategories(newPost.tags);
+      postNumber.up();
       res.status(201).send(post._id.toString());
     });
   });
@@ -39,6 +40,7 @@ function post(app,models,addCategories){
     if (res.locals.user.admin !== true) return res.status(401).send('Unauthorized');
     res.locals.post.remove(err=>{
       if (err) return res.status(500).send('Internal Error');
+      postNumber.down();
       res.status(200).send('Deleted');
     });
   });
