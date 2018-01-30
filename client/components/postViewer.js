@@ -18,12 +18,17 @@ class PostViewer extends Component {
     const last = typeof this.props.onLast == 'function' ? <button className='last' disabled={this.state.disabled==='last'} onClick={this.last}>⇦</button> : null;
     const next = typeof this.props.onNext == 'function' ? <button className='next' disabled={this.state.disabled==='next'} onClick={this.next}>⇨</button> : null;
     return (
-      <div className='postviewer' id='postviewer'>
+      <article className='postviewer' id='postviewer'>
         <h1 className='title'>{post.title}</h1>
-        <div className='content' dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(post.content)}}/>
-        {last}
-        {next}
-      </div>
+        <main className='content' dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(post.content)}}/>
+        <footer>
+          {last}
+          <button onClick={this.dislike} className='dislike'>👎🏻</button>
+          <div className='center'>⬤</div>
+          <button onClick={this.like} className='like'>👍🏻</button>
+          {next}
+        </footer>
+      </article>
     );
   }
   next(){

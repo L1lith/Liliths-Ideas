@@ -1,9 +1,29 @@
-.app .postviewer {
-  border-radius: 5px;
-  //background-color: #ffffff6b;
-  padding: 20px;
-  box-shadow: 0 0 10px 1px #7a7e88;
-  & > .title {
-    font-family: 'Raleway', sans-serif;
+.app {
+  .postviewer {
+    border-radius: 5px;
+    //background-color: #ffffff6b;
+    padding: 20px;
+    padding-bottom: 5px;
+    box-shadow: 0 0 10px 1px #7a7e88;
+    & > .title {
+      font-family: 'Raleway', sans-serif;
+      color: white;
+    }
+    & > .content {
+      margin: 0;
+    }
+    footer {
+      & > * {
+        display: inline-block;
+      }
+      .center {
+        transform: scale(1.5);
+        margin: 0 40px;
+        cursor: default;
+      }
+      .dislike, .like {
+        text-shadow: 8px 4px #00000054;
+      }
+    }
   }
 }

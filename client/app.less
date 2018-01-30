@@ -19,7 +19,7 @@ body {
 }
 .app {
   position: relative;
-  color: #dde3f9;
+  color: #f4f6fd;
   font-family: 'Cabin', sans-serif;
   text-shadow: 0 0 1px black;
   * {
@@ -29,21 +29,20 @@ body {
     background: #9fdad596;
   }
   button {
-    padding: 5px 10px;
+    background-color: transparent;
     margin: 10px;
-    background-color: #daddff;
     border-radius: 4px;
     font-size: 1em;
     border: none;
     user-select: none;
-    transition: background-color 0.3s linear, color 0.1s linear;
+    transition: color 0.1s linear;
+    cursor: pointer;
     &:hover {
-      background-color: #cbd0f9;
-      cursor: pointer;
-      transition: background-color 0.1s linear, color 0.1s linear;
+      color: #080892;
     }
     &:active {
-      background-color: #a4a3e8;
+      transition: none;
+      color: #3f3fda;
     }
   }
   input {
@@ -80,7 +79,6 @@ body {
     padding: 1% 5%;
     text-align: center;
     line-height: 22px;
-    margin-bottom: 30px;
   }
   .spread {
     & > * {
