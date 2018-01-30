@@ -33,12 +33,13 @@ function sanitize(object, format,options={}) {
       }
     } else {
       const formatKeys = Object.keys(format);
-      if (Array.isArray(object) || Object.keys(object).some(property => property.startsWith('$'))) return false; // Sanitize for MongoDB
+      if (Array.isArray(object)) return false; // Sanitize for MongoDB
       const entries = Object.entries(object);
       if (Object.entries(format).length != entries.length) return false;
       return entries.every(pair => {
         const name = pair[0];
         const value = pair[1];
+        if (name.startsWith('$')) return false; // MongoDB Sanitize
         if (format.hasOwnProperty(name)) {
           return sanitize(value, format[name]);
         } else if (format.hasOwnProperty('$'+name)) {

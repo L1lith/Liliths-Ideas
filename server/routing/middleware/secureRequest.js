@@ -3,12 +3,14 @@ module.exports = function(models,withUser=false) {
 
   return (req, res, next)=>{
     const session = req.cookies ? req.cookies.session : null;
+    const usernameIn = req.get('username').toLowerCase();
+    if (typeof username != 'string' || username.length < 3) return res.status(400).send('Malformed Request');
     if (typeof session == 'string' && session.length > 0) {
       Session.findOne({
         _id: session
       }, (err, result) => {
         if (err) throw err;
-        if (!result) return res.status(401).send('Unauthorized')
+        if (!result || result.owner !== usernameIn) return res.status(401).send('Unauthorized')
         res.locals.session = result;
         if (withUser === true) {
           User.findOne({username:result.owner},(err,user)=>{
