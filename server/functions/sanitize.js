@@ -24,7 +24,7 @@ function sanitize(object, format,options={}) {
     } else if (Array.isArray(format)) {
       if (!Array.isArray(object)) {
         return false;
-      } else if (format.length > 1 || arrayAssume !== true){
+      } else if (format.length > 1 || options.arrayAssume !== true){
         return object.every((value, index) => format.hasOwnProperty(index) && sanitize(value, format[index]));
       } else if (format.length === 0) {
         return object.length === 0;
