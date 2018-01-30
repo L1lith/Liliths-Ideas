@@ -1,5 +1,6 @@
 #mainbackground {
   position: fixed;
+  z-index: -500;
   top: 50%;
   left: 50%;
   min-width: 100vw;
