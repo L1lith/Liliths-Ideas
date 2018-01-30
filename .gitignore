@@ -8,6 +8,8 @@
 
 /server/static/build/*
 !/server/static/build/.gitkeep
+/server/static/backgrounds/*
+!/server/static/backgrounds/.gitkeep
 
 # misc
 config.js
