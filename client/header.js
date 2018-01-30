@@ -7,7 +7,7 @@ class Header extends Component {
     return (
         <header id='mainheader'>
           <NavLink to='/'>
-            <h1 className='title backgroundtext'><span className='glow'/>Lilith&#39;s Ideas</h1>
+            <h1 className='title backgroundtext'>Lilith&#39;s Ideas</h1>
           </NavLink>
           <nav>
             <ul className='spread'>

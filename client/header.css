@@ -21,7 +21,7 @@
   letter-spacing: 2vw;
   line-height: 50px;
 }
-#mainheader .title:hover > .glow {
+/* #mainheader .title:hover > .glow {
   border-bottom-color: #59b2dc85;
   transition: border-bottom-color 0.1s ease, color 0.2s ease;
 }
@@ -40,7 +40,7 @@
   border-radius: 16px;
   width: 80%;
   margin-left: 10%;
-}
+} */
 #mainheader > nav > ul > li a {
   text-align: center;
   color: white;
