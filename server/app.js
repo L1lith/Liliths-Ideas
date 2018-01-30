@@ -6,6 +6,7 @@ const routing = require('./routing');
 const cookieParser = require('cookie-parser');
 const getModels = require('./models');
 const httpsRedirect = require('express-https-redirect');
+const compression = require('compression')
 
 let resolve;
 let reject;
@@ -28,6 +29,7 @@ function createApp(){
       }
       app.use(bodyParser.json());
       app.use(cookieParser());
+      app.use(compression());
       routing(app, models);
 
       resolve(app);

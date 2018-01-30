@@ -14,6 +14,6 @@ module.exports = function(app,models){
   });
   app.get('/background',(req,res)=>{
     if (images === null) return res.status(503).send('Unavailable');
-    res.sendFile('/backgrounds/'+images[Math.floor(Math.random()*images.length)],{maxAge:1000 * 60 * 60 * 24});
+    res.sendFile(path.resolve(imageDir,images[Math.floor(Math.random()*images.length)]),{maxAge:0});
   });
 }
