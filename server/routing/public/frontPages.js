@@ -11,7 +11,7 @@ module.exports = function(app,models){
   });
   app.get('/frontpages',(req,res)=>{
     if (postCount === null) return res.status(503).send('Unavailable');
-    res.status(200).send(Math.floor(postCount / 10));
+    res.status(200).send(''+Math.ceil(postCount / 10));
   });
   return {
     up:()=>{if(postCount !== null) postCount++},
