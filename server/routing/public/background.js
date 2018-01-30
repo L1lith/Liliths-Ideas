@@ -9,7 +9,7 @@ module.exports = function(app,models){
   fs.readdir(imageDir,(err,results)=>{
     if (err) return;
     if (results) {
-      results = results.filter(name=>name!=='.gitignore');
+      results = results.filter(name=>!name.endsWith('.gitignore'));
       if (results.length > 0) {
         images = results;
       }
