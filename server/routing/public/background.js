@@ -1,7 +1,8 @@
 const path = require('path');
 const fs = require('fs');
+const express = require('express');
 
-const imageDir = path.resolve(__dirname, '../../static/internal/backgrounds/');
+const imageDir = path.resolve(__dirname, '../../static/backgrounds/');
 
 module.exports = function(app,models){
   let images = null;
@@ -11,8 +12,9 @@ module.exports = function(app,models){
       images = results;
     }
   });
+  app.use('/backgrounds',express.static(imageDir,{maxAge:1000 * 60 * 60 * 24 * 30}));
   app.get('/background',(req,res)=>{
     if (images === null) return res.status(503).send('Unavailable');
-    res.status(200).sendFile(path.resolve(imageDir,images[Math.floor(Math.random()*images.length)]),{maxAge:0});
+    res.redirect('/backgrounds/'+images[Math.floor(Math.random()*images.length)]);
   });
 }
