@@ -1,4 +1,4 @@
-const sections = ['static','frontPage'].map(name=>require('./'+name));
+const sections = ['background','static','frontPage'].map(name=>require('./'+name));
 const post = require('./post');
 const frontPages = require('./frontPages');
 const categories = require('./categories');
