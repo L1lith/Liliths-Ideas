@@ -12,9 +12,8 @@ module.exports = function(app,models){
       images = results;
     }
   });
-  app.use('/backgrounds',express.static(imageDir,{maxAge:1000 * 60 * 60 * 24 * 30}));
   app.get('/background',(req,res)=>{
     if (images === null) return res.status(503).send('Unavailable');
-    res.redirect('/backgrounds/'+images[Math.floor(Math.random()*images.length)]);
+    res.sendFile('/backgrounds/'+images[Math.floor(Math.random()*images.length)],{maxAge:1000 * 60 * 60 * 24});
   });
 }
