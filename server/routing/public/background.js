@@ -12,8 +12,9 @@ module.exports = function(app,models){
       images = results;
     }
   });
-  app.get('/background',(req,res)=>{
+  app.use('/backgrounds',express.static(imageDir,{maxAge: 1000 * 60 * 60 * 24 * 365 * 10}));
+  app.get('/randombackground',(req,res)=>{
     if (images === null) return res.status(503).send('Unavailable');
-    res.sendFile(path.resolve(imageDir,images[Math.floor(Math.random()*images.length)]),{maxAge:0});
+    res.status(200).send('/backgrounds/'+images[Math.floor(Math.random()*images.length)]);
   });
 }

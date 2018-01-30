@@ -6,6 +6,7 @@ import Background from './components/background';
 import Footer from './footer';
 import './app.less';
 import './shapes.css';
+import './animations.css';
 import {connect} from 'react-redux';
 import {validate} from '@redux/actions/auth';
 import {getFrontPage} from '@redux/actions/posts';
