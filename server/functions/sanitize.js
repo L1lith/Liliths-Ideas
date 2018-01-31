@@ -33,7 +33,7 @@ function sanitize(object, format,options={}) {
       }
     } else {
       const formatKeys = Object.keys(format);
-      if (Array.isArray(object)) return false; // Sanitize for MongoDB
+      if (Array.isArray(object)) return false;
       const entries = Object.entries(object);
       if (Object.entries(format).length != entries.length) return false;
       return entries.every(pair => {
