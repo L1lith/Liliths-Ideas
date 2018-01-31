@@ -11,5 +11,7 @@
   transition: opacity 5s ease;
   visibility: hidden;
   background-size: cover;
+  background-position: 50% 50%;
+  background-image: url('/background');
   /* filter: blur(0.7px); */
 }

@@ -15,9 +15,10 @@ module.exports = function(app,models){
       }
     }
   });
-  app.use('/backgrounds',express.static(imageDir,{maxAge: 1000 * 60 * 60 * 24 * 365 * 10}));
-  app.get('/randombackground',(req,res)=>{
+  app.get('/background',(req,res)=>{
     if (images === null) return res.status(503).send('Unavailable');
-    res.status(200).send('/backgrounds/'+images[Math.floor(Math.random()*images.length)]);
+    res.set('Cache-Control','no-cache');
+    res.redirect(307,'/backgrounds/'+images[Math.floor(Math.random()*images.length)]);
   });
+  app.use('/backgrounds',express.static(imageDir,{maxAge: 1000 * 60 * 60 * 24 * 365 * 10}));
 }
