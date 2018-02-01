@@ -8,14 +8,6 @@ const getModels = require('./models');
 const httpsRedirect = require('express-https-redirect');
 const compression = require('compression')
 
-let resolve;
-let reject;
-
-const successful = new Promise((res, rej) => {
-  resolve = res;
-  reject = rej;
-});
-
 function createApp(){
   return new Promise((resolve,reject)=>{
     getModels().then(models => {
