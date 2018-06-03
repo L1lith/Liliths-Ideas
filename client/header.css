@@ -11,9 +11,10 @@
   padding: 0 10%;
 }
 #mainheader .title {
+  color: white;
   padding: 0 2%;
   position: relative;
-  background-image: linear-gradient(90deg,#364b73,#0077a5);
+  /* background-image: linear-gradient(90deg,#364b73,#0077a5); */
   margin-bottom: -10px;
   text-align: center;
   font-size: 3em;

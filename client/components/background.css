@@ -6,12 +6,13 @@
   width: 100vw;
   height: 100vh;
   opacity: 0;
+  filter: brightness(80%) hue-rotate(20deg);
   user-select: none;
   transform: translate(-50%, -50%);
-  transition: opacity 5s ease;
+  transition: opacity 2s ease;
   visibility: hidden;
   background-size: cover;
   background-position: 50% 50%;
-  background-image: url('/background');
+  background-image: url('/images/background');
   /* filter: blur(0.7px); */
 }
